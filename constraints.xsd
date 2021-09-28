@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Constraints">
+  <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element type="DeviceLevelConstraint" name="DeviceConstraint"/>
+          <xs:element type="FbLevelConstraint" name="FbConstraint"/>
+          <!-- ... -->
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="ConstraintType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="accumulating" />
+      <xs:enumeration value="asserting" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ConstraintLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="application-level" />
+      <xs:enumeration value="device-level" />
+      <xs:enumeration value="fb-level" />
+      <xs:enumeration value="connection-level" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DeviceLevelConstraint">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="ConstraintType" use="required"/>
+    <xs:attribute name="level" type="ConstraintLevel" use="required" 
+                 fixed="device-level"/>
+    <xs:attribute name="device-check" type="xs:string" use="required" />
+    <xs:attribute name="fb-check" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="FbLevelConstraint">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="ConstraintType" use="required"/>
+    <xs:attribute name="level" type="ConstraintLevel" use="required" 
+                  fixed="fb-level"/>
+    <xs:attribute name="fb-check" type="xs:string" use="required" />
+    <xs:attribute name="fb-check-acc" type="xs:string" use="optional" />    
+  </xs:complexType>
+</xs:schema>

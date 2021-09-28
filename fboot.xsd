@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Request">
+    <xs:complexType>
+        <xs:attribute name="ID" type="xs:int" use="required"/>
+        <xs:attribute name="Action" type="ActionType" use="required"/>
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element type="FBType" name="FB"/>
+            <xs:element type="ConnectionType" name="Connection"/>
+          </xs:choice>
+        </xs:sequence>
+      </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="ActionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="START" />
+      <xs:enumeration value="STOP" />
+      <xs:enumeration value="CREATE" />
+      <xs:enumeration value="WRITE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FBType">
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Connectiontype">
+    <xs:attribute name="Source" type="xs:string" use="required"/>
+    <xs:attribute name="Destination" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Mappings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="MappingType" name="Mapping" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="SCL" type="xs:string" use="required"/>
+      <xs:attribute name="System" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="MappingType">
+    <xs:sequence>
+      <xs:element type="IEDType" name="IED" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>  
+    <xs:attribute name="factor" type="xs:string" use="optional"/>  
+  </xs:complexType>
+
+  <xs:complexType name="IEDType">
+    <xs:sequence>
+      <xs:element type="FBType" name="FB" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="FBType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>
